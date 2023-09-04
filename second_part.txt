@@ -1,0 +1,3 @@
+
+    ConvertToNepaliText = GetNepali(Number)
+End Function

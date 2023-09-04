@@ -1,0 +1,117 @@
+'Declare Global variables for storing numbers from 0 to 99 and hundred to kharab
+Dim NepaliNumbers() As Variant
+Dim Specials() As Variant
+
+Function GetNepali(ByVal Number As LongLong) As String
+    Dim FirstDigit As LongLong
+    Dim RemainingDigits As LongLong
+    Dim result As String
+       If Number >= 0 And Number <= 99 Then ' zero to hundred
+            result = NepaliNumbers(CLng(Number))
+        
+        ElseIf Number >= 100 And Number <= 999 Then ' hundred to thousand
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 1))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 1))
+            If RemainingDigits = 0 Then
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(0)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(0) & NepaliNumbers(CLng(RemainingDigits))
+            End If
+            
+        ElseIf Number >= 1000 And Number <= 9999 Then ' thousand to ten thousand
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 1))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 1))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(1)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(1) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 10000 And Number <= 99999 Then ' ten thousand to one lakh
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 2))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 2))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(1)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(1) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 100000 And Number <= 999999 Then ' one lakh to 10 lakh
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 1))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 1))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(2)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(2) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 1000000 And Number <= 9999999 Then '10 lakh to 99 lakh
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 2))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 2))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(2)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(2) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 10000000 And Number <= 99999999 Then '1 crore to 10 crore
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 1))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 1))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(3)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(3) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 100000000 And Number <= 999999999 Then '10 crore to 1 arab
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 2))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 2))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(3)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(3) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 1000000000 And Number <= 9999999999# Then ' 1 arab to 10 arab
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 1))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 1))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(4)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(4) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 10000000000# And Number <= 99999999999# Then '10 arab to 1 kharab
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 2))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 2))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(4)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(4) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 100000000000# And Number <= 999999999999# Then ' 1 arab to 10 arab
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 1))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 1))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(5)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(5) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 1000000000000# And Number <= 9999999999999# Then '10 arab to 1 kharab
+            FirstDigit = Number \ (10 ^ (Len(CStr(Number)) - 2))
+            RemainingDigits = Number Mod (10 ^ (Len(CStr(Number)) - 2))
+            If RemainingDigits = 0 Then
+                result = GetNepali(CLng(FirstDigit)) & Specials(5)
+            Else
+                result = NepaliNumbers(CLng(FirstDigit)) & Specials(5) & GetNepali(RemainingDigits)
+            End If
+        ElseIf Number >= 10000000000000# Then ' greater than 1 kharab
+            FirstDigit = Number \ (10 ^ (11))
+            RemainingDigits = Number Mod (10 ^ (11))
+            If RemainingDigits = 0 Then
+                result = GetNepali(FirstDigit) & Specials(5)
+            Else
+                result = GetNepali(FirstDigit) & Specials(5) & GetNepali(RemainingDigits)
+            End If
+        Else
+            result = "Not Implemented"
+        End If
+        GetNepali = result
+End Function
+
+Function ConvertToNepaliText(ByVal Number As LongLong) As String
+    
+    NepaliNumbers = Array(
